@@ -99,7 +99,7 @@ defmodule YtUtility do
     formats_string
     |> String.split("\n")
     |> Enum.map(&Regex.run(by_groups, &1, capture: :all_but_first))
-    |> Enum.filter(& &1)
+    |> Enum.reject(&is_nil(&1))
     |> Enum.map(fn [num, ext, desc] -> %{num: num, extension: ext, description: desc} end)
     |> Enum.sort_by(&{&1.extension, &1.num})
   end
