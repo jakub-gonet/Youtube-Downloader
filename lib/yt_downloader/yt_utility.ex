@@ -73,6 +73,37 @@ defmodule YtUtility do
     end
   end
 
+  @doc """
+  Gets available formats via downloader from given link.
+  Returns map with three keys: `num`, `extension` and `description`.
+  """
+  def get_available_formats(link) do
+    {output, error} =
+      System.cmd(
+        @downloader,
+        ["--list-formats", link]
+      )
+
+    with 0 <- error,
+         formats <- get_formats_list(output) do
+      formats
+    else
+      1 -> {:error, :format_downloader_error}
+      error -> error
+    end
+  end
+
+  defp get_formats_list(formats_string) do
+    by_groups = ~r{(\d+)\s+(\w+)\s+(.+)}
+
+    formats_string
+    |> String.split("\n")
+    |> Enum.map(&Regex.run(by_groups, &1, capture: :all_but_first))
+    |> Enum.filter(& &1)
+    |> Enum.map(fn [num, ext, desc] -> %{num: num, extension: ext, description: desc} end)
+    |> Enum.sort_by(&{&1.extension, &1.num})
+  end
+
   defp extract_file_path_from_map(metadata) do
     Map.get(metadata, "_filename", {:error, :missing_entry})
   end
