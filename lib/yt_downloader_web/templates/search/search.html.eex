@@ -1,0 +1,3 @@
+<div class="jumbotron">
+  <h2>You searched <%= @query %></h2>
+</div>
