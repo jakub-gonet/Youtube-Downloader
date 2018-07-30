@@ -1,0 +1,4 @@
+<%= form_for @conn, search_path(@conn, :search), [as: :search, method: "get", class: "navbar-form pull-right"], fn f -> %>
+  <%= text_input f, :q, [placeholder: "Search", class: "form-control"] %>
+  <%= submit "Search", [class: "btn btn-primary"] %>
+<% end %>
