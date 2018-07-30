@@ -4,29 +4,31 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Simple to use Youtube video downloader">
+    <meta name="author" content="Jump3r">
 
-    <title>Hello YtDownloader!</title>
+    <title>Youtube downloader</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/custom.css") %>">
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
-        </nav>
-        <span class="logo"></span>
-      </header>
+    <header class="header">
+      <nav class="navbar bg-primary" role="navigation">
+        <a class="navbar-brand" href="#">Navbar</a>
 
+        <%= render YtDownloaderWeb.SharedView, "searchbar.html", assigns %> 
+
+      </nav>
+    <header>
+
+    <div class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
+        <%= render YtDownloaderWeb.SharedView, "footer.html", assigns %>
       </main>
 
     </div> <!-- /container -->
