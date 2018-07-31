@@ -15,7 +15,7 @@
   <body>
     <header class="header">
       <nav class="navbar bg-primary" role="navigation">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="<%= page_path(@conn, :index) %>">Navbar</a>
 
         <%= render YtDownloaderWeb.SharedView, "searchbar.html", assigns %> 
 
