@@ -18,6 +18,7 @@ defmodule YtDownloaderWeb.Router do
 
     get "/", PageController, :index
     get "/search", SearchController, :search
+    get "/download/:id", DownloadController, :show
   end
 
   # Other scopes may use custom stacks.
