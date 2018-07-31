@@ -3,6 +3,7 @@ defmodule YtUtility do
   This module is supposed to contain all operations related with parsing youtube link,
   downloading content and providing resource path on disk
   """
+  @yt_api_key Application.get_env(:yt_downloader, :yt_api_key)
 
   @watch_url "https://www.youtube.com/watch?"
   @shortened_watch_url "https://youtu.be/"
@@ -67,8 +68,6 @@ defmodule YtUtility do
     |> Map.get(:body)
     |> Poison.decode()
   end
-
-  
 
   @doc """
   Downloads a given link to given file type and returns path where file was saved.
