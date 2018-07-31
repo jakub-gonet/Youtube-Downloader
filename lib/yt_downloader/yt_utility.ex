@@ -43,6 +43,34 @@ defmodule YtUtility do
   def parse(_), do: {:error, :unrecognized_link}
 
   @doc """
+  Makes a request to YT API asking for search results.
+  Returns results or `{:error, "reason"}` tuple.
+
+  `results_number` is a number between 0 to 50, inclusive.
+  `types` is a string of a comma-separated list of resource types. 
+  Acceptable values are: 
+    +video
+    +channel
+    +playlist.
+  """
+  def search(query, types \\ "video,channel,playlist", results_number \\ 10) do
+    HTTPotion.get(
+      "https://www.googleapis.com/youtube/v3/search",
+      query: %{
+        q: query,
+        maxResults: results_number,
+        type: types,
+        key: @yt_api_key,
+        part: "snippet"
+      }
+    )
+    |> Map.get(:body)
+    |> Poison.decode()
+  end
+
+  
+
+  @doc """
   Downloads a given link to given file type and returns path where file was saved.
 
   `file_type` is `bestvideo`, `bestaudio`, `worstvideo` or `worstaudio`
