@@ -1,4 +1,3 @@
-<h3 class="text-center my-5">You searched <%= get_searched_query(@search_results) %></h2> 
 <%= for item <- @search_results["items"] do %>
     <%= render "video_thumbnail.html", extract_video_data(item) %>
-  <% end %>
+<% end %>
