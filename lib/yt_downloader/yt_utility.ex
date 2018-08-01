@@ -18,8 +18,13 @@ defmodule YtUtility do
   @doc """
   Checks if link starts with Youtube's links for video or playlist
   """
-  def valid_link?(link),
-    do: String.starts_with?(link, [@watch_url, @shortened_watch_url, @playlist_url])
+  def valid_link?(link) do
+    cond do
+      String.starts_with?(link, [@watch_url, @shortened_watch_url]) -> {:ok, :video}
+      String.starts_with?(link, @playlist_url) -> {:ok, :playlist}
+      true -> :error
+    end
+  end
 
   @doc """
   Parses a link and returns prepared youtube link without all GET params except `v=` in case of videos
