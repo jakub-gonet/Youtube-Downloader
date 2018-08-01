@@ -66,18 +66,39 @@ defmodule YtUtility do
     +playlist.
   """
   def search(query, types \\ "video,channel,playlist", results_number \\ 10) do
-    HTTPotion.get(
-      "https://www.googleapis.com/youtube/v3/search",
-      query: %{
-        q: query,
-        maxResults: results_number,
-        type: types,
-        key: @yt_api_key,
-        part: "snippet"
+    api_call_query = %{
+      q: query,
+      maxResults: results_number,
+      type: types,
+      key: @yt_api_key,
+      part: "snippet"
+    }
+
+    search_info = %{
+      "search_info" => %{
+        "query" => query,
+        "search_types" => types,
+        "requested_results_num" => results_number
       }
-    )
-    |> Map.get(:body)
-    |> Poison.decode()
+    }
+
+    result = %{}
+
+    with %{body: body, status_code: 200} <-
+           HTTPotion.get(
+             "https://www.googleapis.com/youtube/v3/search",
+             query: api_call_query
+           ),
+         {:ok, result} <- Poison.decode(body),
+         result <- Map.merge(result, search_info),
+         false <- Map.has_key?(result, "error") do
+      result
+    else
+      %{status_code: code} -> {:error, "API returned #{code} code."}
+      true -> {:error, "API error: #{result["code"]}, #{result["message"]}"}
+      error when is_bitstring(error) -> {:error, error}
+      _ -> {:error, "No reason given"}
+    end
   end
 
   @doc """
