@@ -16,6 +16,12 @@ defmodule YtUtility do
   @downloader_options ["-i", "--ignore-config", "--print-json", "--geo-bypass"]
 
   @doc """
+  Checks if link starts with Youtube's links for video or playlist
+  """
+  def valid_link?(link),
+    do: String.starts_with?(link, [@watch_url, @shortened_watch_url, @playlist_url])
+
+  @doc """
   Parses a link and returns prepared youtube link without all GET params except `v=` in case of videos
   and `list=` in case of playlists
 
