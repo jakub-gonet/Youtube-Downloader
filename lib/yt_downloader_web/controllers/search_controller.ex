@@ -7,7 +7,7 @@ defmodule YtDownloaderWeb.SearchController do
         redirect_to(conn, query, type)
 
       :error ->
-        render(conn, "search.html", search_results: YtUtility.search(query))
+        render(conn, "search.html", search_results: YtUtility.search(query, "video,playlist"))
     end
   end
 
