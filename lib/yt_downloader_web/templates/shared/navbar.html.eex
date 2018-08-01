@@ -1,0 +1,6 @@
+<header class="header">
+  <nav class="navbar bg-elixir row p-3" role="navigation">
+    <a class="navbar-brand text-light col" href="<%= page_path(@conn, :index) %>">Youtube Downloader</a>
+      <%= render YtDownloaderWeb.SharedView, "searchbar.html", assigns %> 
+  </nav>
+</header>

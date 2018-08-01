@@ -8,29 +8,22 @@
     <meta name="author" content="Jump3r">
 
     <title>Youtube downloader</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/bootstrap.min.css") %>">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/custom.css") %>">
   </head>
 
   <body>
-    <header class="header">
-      <nav class="navbar bg-primary" role="navigation">
-        <a class="navbar-brand" href="<%= page_path(@conn, :index) %>">Navbar</a>
-
-        <%= render YtDownloaderWeb.SharedView, "searchbar.html", assigns %> 
-
-      </nav>
-    <header>
+    <%= render YtDownloaderWeb.SharedView, "navbar.html", assigns %>
 
     <div class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
-        <%= render YtDownloaderWeb.SharedView, "footer.html", assigns %>
       </main>
 
+      <%= render YtDownloaderWeb.SharedView, "footer.html", assigns %>
+      
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
