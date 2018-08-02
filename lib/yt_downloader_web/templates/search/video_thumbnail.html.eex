@@ -2,7 +2,7 @@
   <img class="img-fluid" src="<%= @thumbnail %>" alt="">
   <div class="card-body py-1">
     <a href="<%= @download_page %>">
-      <h4 class="card-title my-0"><%= @title %></h4>
+      <h5 class="card-title my-0"><%= @title %></h4>
     </a>
     <p class="card-text mu-0 "><small class="text-muted"><%= @channel %></small></p>
     <p class="card-text yt-desc"><%= @desc %></p>
