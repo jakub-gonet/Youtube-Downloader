@@ -19,3 +19,8 @@ defmodule YtDownloaderWeb.SearchView do
   def kind(%{"kind" => "youtube#playlist"}), do: :playlist
   def kind(%{"kind" => "youtube#video"}), do: :video
   def kind(_), do: :error
+
+  defp get_id(%{"id" => id}) do
+    Map.get(id, "playlistId") || Map.get(id, "videoId")
+  end
+end
