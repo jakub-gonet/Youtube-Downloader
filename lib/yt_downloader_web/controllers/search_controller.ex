@@ -2,11 +2,11 @@ defmodule YtDownloaderWeb.SearchController do
   use YtDownloaderWeb, :controller
 
   def search(conn, %{"search" => %{"q" => query}}) do
-    case YtUtility.valid_link?(query) do
-      {:ok, type} ->
+    case YtUtility.get_url_type(query) do
+      type when type in [:video, :playlist] ->
         redirect_to(conn, query, type)
 
-      :error ->
+      :other ->
         render(conn, "search.html", search_results: YtUtility.search(query, "video,playlist"))
     end
   end
