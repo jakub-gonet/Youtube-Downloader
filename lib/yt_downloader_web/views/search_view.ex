@@ -15,4 +15,7 @@ defmodule YtDownloaderWeb.SearchView do
       download_page_link: get_id(query)
     }
   end
-end
+
+  def kind(%{"kind" => "youtube#playlist"}), do: :playlist
+  def kind(%{"kind" => "youtube#video"}), do: :video
+  def kind(_), do: :error
