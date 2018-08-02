@@ -1,10 +1,10 @@
 <div class="card d-flex flex-row my-1" >
-  <img class="img-fluid" src="<%= @thumbnail %>" alt="">
+  <img class="img-fluid" src="<%= @data.thumbnail %>" alt="">
   <div class="card-body py-1">
-    <a href="<%= @download_page %>">
-      <h5 class="card-title my-0"><%= @title %></h4>
+    <a href="<%= video_path(@conn, :show, @data.download_page_link) %>">
+      <h5 class="card-title my-0"><%= @data.title %></h4>
     </a>
-    <p class="card-text mu-0 "><small class="text-muted"><%= @channel %></small></p>
-    <p class="card-text yt-desc"><%= @desc %></p>
+    <p class="card-text mu-0 "><small class="text-muted"><%= @data.channel %></small></p>
+    <p class="card-text yt-desc"><%= @data.desc %></p>
   </div>
 </div>
