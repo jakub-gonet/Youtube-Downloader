@@ -6,13 +6,13 @@ defmodule YtDownloaderWeb.SearchView do
 
   def extract_video_data(search_result)
 
-  def extract_video_data(%{"snippet" => video_data}) do
+  def extract_video_data(query = %{"snippet" => video_data}) do
     %{
       channel: video_data["channelTitle"],
       title: video_data["title"],
       desc: video_data["description"],
       thumbnail: get_in(video_data, ["thumbnails", "medium", "url"]),
-      download_page: "#"
+      download_page_link: get_id(query)
     }
   end
 end
