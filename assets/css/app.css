@@ -1,1 +1,25 @@
 /* This file is for your main application css. */
+.bg-elixir {
+  background-color: #584762;
+}
+
+.btn-outline-primary {
+  color: #584762;
+  background: #fff;
+  border-color: #584762;
+  border-width: 1px;
+}
+
+/* Youtube entry style */
+@media screen and (max-width: 768px) {
+  .yt-desc {
+    display: none;
+  }
+}
+
+.yt-desc {
+  font-size: 0.9rem;
+}
+
+/* Phoenix flash messages */
+.alert:empty { display: none; }
