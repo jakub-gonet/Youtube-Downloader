@@ -28,8 +28,9 @@ defmodule YtDownloaderWeb do
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/yt_downloader_web/templates",
-                        namespace: YtDownloaderWeb
+      use Phoenix.View,
+        root: "lib/yt_downloader_web/templates",
+        namespace: YtDownloaderWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]

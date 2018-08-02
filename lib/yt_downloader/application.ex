@@ -11,7 +11,7 @@ defmodule YtDownloader.Application do
       # Start the Ecto repository
       supervisor(YtDownloader.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(YtDownloaderWeb.Endpoint, []),
+      supervisor(YtDownloaderWeb.Endpoint, [])
       # Start your own worker by calling: YtDownloader.Worker.start_link(arg1, arg2, arg3)
       # worker(YtDownloader.Worker, [arg1, arg2, arg3]),
     ]
