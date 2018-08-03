@@ -61,18 +61,20 @@ defmodule YtUtility do
   Returns results or `{:error, "reason"}` tuple.
 
   `results_number` is a number between 0 to 50, inclusive.
-  `types` is a string of a comma-separated list of resource types. 
-  Acceptable values are: 
+  `types` is a string of a comma-separated list of resource types.
+  Acceptable values are:
     +video
     +channel
     +playlist.
   """
   def search(query, types \\ "video,channel,playlist", results_number \\ 10) do
+    search_api_url = "https://www.googleapis.com/youtube/v3/search"
+
     api_call_query = %{
+      key: @yt_api_key,
       q: query,
       maxResults: results_number,
       type: types,
-      key: @yt_api_key,
       part: "snippet"
     }
 
@@ -84,22 +86,11 @@ defmodule YtUtility do
       }
     }
 
-    result = %{}
-
-    with %{body: body, status_code: 200} <-
-           HTTPotion.get(
-             "https://www.googleapis.com/youtube/v3/search",
-             query: api_call_query
-           ),
+    with {:ok, body} <- make_request(search_api_url, api_call_query),
          {:ok, result} <- Poison.decode(body),
-         result <- Map.merge(result, search_info),
-         false <- Map.has_key?(result, "error") do
+         :ok <- valid_api_response?(result),
+         result <- Map.merge(result, search_info) do
       result
-    else
-      %{status_code: code} -> {:error, "API returned #{code} code."}
-      true -> {:error, "API error: #{result["code"]}, #{result["message"]}"}
-      error when is_bitstring(error) -> {:error, error}
-      _ -> {:error, "No reason given"}
     end
   end
 
@@ -110,6 +101,8 @@ defmodule YtUtility do
   `file_type` can be also one of the numbers returned by `get_available_formats/1`
   or `3gp`, `aac`, `flv`, `m4a`, `mp3`, `mp4`, `ogg`, `wav`, `webm` extentions (if available of course).
   """
+  def download(url, filetype)
+
   def download(url = @playlist_url <> _, file_type),
     do: _download(url, @playlist_template, file_type)
 
@@ -151,6 +144,20 @@ defmodule YtUtility do
     else
       1 -> {:error, :format_downloader_error}
       error -> error
+    end
+  end
+
+  defp make_request(url, options) do
+    case HTTPotion.get(url, query: options) do
+      %{body: body, status_code: 200} -> {:ok, body}
+      %{status_code: code} -> {:error, "API returned #{code} code."}
+    end
+  end
+
+  defp valid_api_response?(response) do
+    case Map.has_key?(response, "error") do
+      false -> :ok
+      true -> {:error, "API error: #{response["code"]}, #{response["message"]}"}
     end
   end
 
