@@ -1,4 +1,6 @@
 defmodule YtUtility do
+  require Logger
+
   @moduledoc """
   This module is supposed to contain all operations related with parsing youtube link,
   downloading content and providing resource path on disk
@@ -68,6 +70,7 @@ defmodule YtUtility do
     +playlist.
   """
   def search(query, types \\ "video,channel,playlist", results_number \\ 10) do
+    Logger.info("Searching for \"#{query}\"")
     search_api_url = "https://www.googleapis.com/youtube/v3/search"
 
     api_call_query = %{
