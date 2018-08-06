@@ -89,12 +89,9 @@ defmodule YtUtility do
       }
     }
 
-    with {:ok, body} <- make_request(search_api_url, api_call_query),
-         {:ok, result} <- Poison.decode(body),
-         :ok <- valid_api_response?(result),
-         result <- Map.merge(result, search_info) do
-      result
-    end
+    search_api_url
+    |> make_api_request(api_call_query)
+    |> Map.merge(search_info)
   end
 
   @doc """
@@ -150,10 +147,14 @@ defmodule YtUtility do
     end
   end
 
-  defp make_request(url, options) do
-    case HTTPotion.get(url, query: options) do
-      %{body: body, status_code: 200} -> {:ok, body}
+  defp make_api_request(url, query) do
+    with %{body: body, status_code: 200} <- HTTPotion.get(url, query: query),
+         {:ok, result} <- Poison.decode(body),
+         :ok <- valid_api_response?(result) do
+      result
+    else
       %{status_code: code} -> {:error, "API returned #{code} code."}
+      err -> err
     end
   end
 
