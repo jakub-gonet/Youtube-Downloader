@@ -3,11 +3,21 @@
   background-color: #584762;
 }
 
-.btn-outline-primary {
+.btn-outline-elixir {
   color: #584762;
   background: #fff;
   border-color: #584762;
   border-width: 1px;
+}
+
+.btn-elixir {
+  color: #fff;
+  background-color: #584762;
+  border-color: #584762;
+}
+
+.border-elixir {
+  border-color: #584762!important;
 }
 
 /* Youtube entry style */
@@ -19,6 +29,10 @@
 
 .yt-desc {
   font-size: 0.9rem;
+}
+
+.yt-frame-border {
+  border: 5px solid;
 }
 
 /* Phoenix flash messages */
