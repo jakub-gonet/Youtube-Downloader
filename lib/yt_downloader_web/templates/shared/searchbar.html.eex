@@ -1,4 +1,4 @@
-<%= form_for @conn, search_path(@conn, :search), [as: :search, method: "get", class: "form-inline col-9"], fn f -> %>
-  <%= text_input f, :q, [placeholder: "Search", class: "form-control flex-grow-1"] %>
-  <%= submit "Search", [class: "btn btn-success ml-1"] %>
+<%= form_for @conn, search_path(@conn, :search), [as: :search, method: "get", class: "form-inline"], fn f -> %>
+  <%= text_input f, :q, [placeholder: "Search", class: "form-control mr-sm-1"] %>
+  <%= submit "Search", [class: "btn btn-success"] %>
 <% end %>
