@@ -12,7 +12,7 @@ defmodule YtDownloaderWeb.SearchView do
       title: video_data["title"],
       desc: video_data["description"],
       thumbnail: get_in(video_data, ["thumbnails", "medium", "url"]),
-      download_page_link: get_id(query)
+      video_id: get_id(query)
     }
   end
 
