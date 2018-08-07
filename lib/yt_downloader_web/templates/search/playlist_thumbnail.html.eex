@@ -1,7 +1,7 @@
 <div class="card d-flex flex-row my-1" >
   <img class="img-fluid" src="<%= @data.thumbnail %>" alt="">
   <div class="card-body py-1">
-    <a href="<%= video_path(@conn, :show, @data.id) %>">
+    <a href="<%= playlist_path(@conn, :show, @data.id) %>">
       <h5 class="card-title my-0">P -> <%= @data.title %></h4>
     </a>
     <p class="card-text mu-0 "><small class="text-muted"><%= @data.channel %></small></p>
