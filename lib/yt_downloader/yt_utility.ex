@@ -89,6 +89,22 @@ defmodule YtUtility do
     |> Map.merge(%{name => get_in(data, field_name)})
     |> _extract_video_data(data, tail)
   end
+
+  @doc """
+  Gets video data from YT API
+  """
+  def get_video_data(id, part \\ "snippet,id") do
+    video_api_url = "https://www.googleapis.com/youtube/v3/videos"
+
+    api_call_query = %{
+      key: @yt_api_key,
+      part: part,
+      id: id
+    }
+
+    make_api_request(video_api_url, api_call_query)
+  end
+
   @doc """
   Makes a request to YT API asking for search results.
   Returns results or `{:error, "reason"}` tuple.
