@@ -1,7 +1,21 @@
 defmodule YtDownloaderWeb.PlaylistController do
   use YtDownloaderWeb, :controller
 
-  def show(conn, %{"id" => id}) do
-    render(conn, "playlist.html", id: id)
+  def show(conn, %{"id" => id} = params) do
+    playlist_title = Map.get(params, "title", "Playlist")
+    wanted = [
+      id: ["snippet", "resourceId", "videoId"],
+      title: ["snippet", "title"],
+      position: ["snippet", "position"],
+      thumbnail: ["snippet", "thumbnails", "default", "url"],
+    ]
+
+    results =
+      id
+      |> YtUtility.get_playlist_data()
+      |> Map.get("items")
+      |> Enum.map(&YtUtility.extract_video_data(&1, wanted))
+
+    render(conn, "playlist.html", videos: results, title: playlist_title)
   end
 end
