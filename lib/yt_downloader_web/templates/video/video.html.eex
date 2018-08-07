@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="embed-responsive embed-responsive-16by9 yt-frame-border rounded border-elixir">
+      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= @data.id %>?rel=0" allowfullscreen></iframe>
+    </div>
+  </div>
+  <div class="col-md-6 my-sm-2 my-md-0 pl-md-0">
+    <div class="card card-body">
+
+      <div class="card-title">
+        <div class="d-flex">
+          <h2 class="m-0 flex-grow-1">
+            <a class="hide-link" href="https://www.youtube.com/watch?v=<%= @data.id%>">
+              <%= @data.title %>
+            </a>
+          </h2>
+          <button class="btn align-self-end" data-toggle="collapse" data-target="#desc">
+            <img src="<%= static_path(@conn, "/fonts/three-bars.svg") %>"></img>
+          </button>
+        </div>
+        <small class="text-muted m-0">
+          <a class="hide-link" href="https://www.youtube.com/channel/<%= @data.channel_id%>">
+            <%= @data.channel %>
+          </a>
+        </small>
+      </div>
+      
+      <span id="desc" class="mt-3 card-text collapse"> <%= @data.desc %></span>
+
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4 d-flex flex-column justify-content-between">
+    <%= render YtDownloaderWeb.SharedView, "download_options.html" %>
+  </div>
+</div>
+
+ <%# data-toggle="collapse" data-target="#desc" %>
