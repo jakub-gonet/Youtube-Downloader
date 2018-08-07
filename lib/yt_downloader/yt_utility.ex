@@ -106,6 +106,22 @@ defmodule YtUtility do
   end
 
   @doc """
+  Gets playlist data from YT API
+  """
+  def get_playlist_data(id, part \\ "snippet,id") do
+    playlist_api_url = "https://www.googleapis.com/youtube/v3/playlistItems"
+
+    api_call_query = %{
+      key: @yt_api_key,
+      part: part,
+      playlistId: id,
+      maxResults: 50
+    }
+
+    make_api_request(playlist_api_url, api_call_query)
+  end
+
+  @doc """
   Makes a request to YT API asking for search results.
   Returns results or `{:error, "reason"}` tuple.
 
