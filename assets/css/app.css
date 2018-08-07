@@ -1,4 +1,7 @@
 /* This file is for your main application css. */
+
+/* custom color */
+
 .bg-elixir {
   background-color: #584762;
 }
@@ -17,10 +20,11 @@
 }
 
 .border-elixir {
-  border-color: #584762!important;
+  border-color: #584762 !important;
 }
 
 /* Youtube entry style */
+
 @media screen and (max-width: 768px) {
   .yt-desc {
     display: none;
@@ -35,5 +39,15 @@
   border: 5px solid;
 }
 
+/* miscellaneous */
+
+.hide-link, .hide-link:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
 /* Phoenix flash messages */
-.alert:empty { display: none; }
+
+.alert:empty {
+  display: none;
+}
