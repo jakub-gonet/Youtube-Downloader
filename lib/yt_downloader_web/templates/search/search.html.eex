@@ -1,6 +1,6 @@
-<%= for item <- @search_results["items"] do 
-    case kind(item["id"]) do
-       :playlist -> render "playlist_thumbnail.html", data: extract_video_data(item), conn: @conn
-       :video -> render "video_thumbnail.html", data: extract_video_data(item), conn: @conn
+<%= for item <- @search_results do 
+    case item[:type] do
+       :playlist -> render "playlist_thumbnail.html", data: item, conn: @conn
+       :video -> render "video_thumbnail.html", data: item, conn: @conn
     end
 end %>
