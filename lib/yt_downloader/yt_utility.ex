@@ -59,6 +59,37 @@ defmodule YtUtility do
   def parse(_), do: {:error, :unrecognized_link}
 
   @doc """
+  Extracts provided data from API's response to map.
+
+  `params` should be keywords list, value should be a path list.
+
+  ## Example:
+  iex> results = YtUtility.search("hello", "video", 2)["items"]
+  iex> options = [title: ["snippet", "title"], thumbnail: ["snippet", "thumbnails", "medium", "url"]]
+  iex> Enum.map(results, &YtUtility.extract_video_data(&1, options))
+  [
+    %{
+      thumbnail: "https://i.ytimg.com/vi/YQHsXMglC9A/mqdefault.jpg",
+      title: "Adele - Hello"
+    },
+    %{
+      thumbnail: "https://i.ytimg.com/vi/bFhQL130aYQ/mqdefault.jpg",
+      title: "Hello | Đàm Vĩnh Hưng x Binz | Hương Giang, Trấn Thành, Thánh Catwalk Sinon, Hữu Vi | Official MV"
+    }
+  ]
+
+
+  """
+  def extract_video_data(data, params), do: _extract_video_data(%{}, data, params)
+
+  defp _extract_video_data(extracted, _data, []), do: extracted
+
+  defp _extract_video_data(extracted, data, [{name, field_name} | tail]) do
+    extracted
+    |> Map.merge(%{name => get_in(data, field_name)})
+    |> _extract_video_data(data, tail)
+  end
+  @doc """
   Makes a request to YT API asking for search results.
   Returns results or `{:error, "reason"}` tuple.
 
