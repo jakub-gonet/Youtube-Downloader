@@ -21,7 +21,7 @@ defmodule YtDownloaderWeb.Router do
     get("/search", SearchController, :search)
     get("/video/:id", VideoController, :show)
     get("/playlist/:id", PlaylistController, :show)
-    get("/download/:id", DownloadController, :show)
+    post("/download", DownloadController, :new)
   end
 
   # Other scopes may use custom stacks.
