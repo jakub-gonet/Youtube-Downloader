@@ -32,9 +32,11 @@
 </div>
 
 <div class="row">
-  <form class="col-md-4 d-flex flex-column justify-content-between">
-    <%= render YtDownloaderWeb.SharedView, "download_options.html" %>
-  </form>
+<div class="col-md-4 d-flex flex-column justify-content-between">
+<%= form_for @conn, download_path(@conn, :new), fn f -> %>
+  <%= hidden_input(f, :hidden, name: "id", value: @data.id) %>
+  <%= render YtDownloaderWeb.SharedView, "download_options.html", form: f %>
+<% end %>
 </div>
 
  <%# data-toggle="collapse" data-target="#desc" %>
