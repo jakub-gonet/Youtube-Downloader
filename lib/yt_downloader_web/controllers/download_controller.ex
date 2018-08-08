@@ -1,7 +1,10 @@
 defmodule YtDownloaderWeb.DownloadController do
   use YtDownloaderWeb, :controller
+  require Logger
 
-  def show(conn, _params) do
+  def new(conn, params) do
     # render conn, "download.html", query: query
-  end
+    Logger.info(inspect(params))
+    redirect(conn, to: "/")
+   end
 end
