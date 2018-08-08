@@ -1,0 +1,10 @@
+<h4><%= @title %></h4>
+
+<button id="selectAll" class="btn btn-elixir">Toggle selection</button>
+
+<%= form_for @conn, download_path(@conn, :new), fn f -> %>
+  <%= for item <- @videos do 
+    render "video_thumbnail.html", data: item, form: f
+  end %>
+  <%= render YtDownloaderWeb.SharedView, "download_options.html", form: f %>
+<% end %>
