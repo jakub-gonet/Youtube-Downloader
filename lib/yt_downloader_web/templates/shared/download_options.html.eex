@@ -1,18 +1,5 @@
-<form>
   <div class="form-group my-2">
     <label class="mr-2">Choose file format</label>
-    <select class="btn btn-elixir" id="select">
-      <optgroup label="Audio">
-        <option value="mp3">MP3</option>
-        <option value="wav">WAV</option>
-        <option value="flac">FLAC</option>
-      </optgroup>
-      <optgroup label="Video">
-        <option value="webm">WebM</option>
-        <option value="mp4">MP4</option>
-        <option value="gif">GIF</option>
-      </optgroup>
-    </select>
+  <%= select(@form, :format, ["Audio": ["MP3", "WAV", "FLAC"], "Video": ["WebM", "MP4", "GIF"]],  class: "btn btn-elixir") %>
   </div>
-  <button type="submit" class="btn btn-elixir btn-lg btn-block">Download</button>
-</form>
+<%= submit "Download", id: "download_btn", class: "btn btn-elixir btn-lg btn-block" %>
