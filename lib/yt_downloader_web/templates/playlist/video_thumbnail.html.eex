@@ -1,8 +1,7 @@
 <div class="card d-flex flex-row my-1 overlayable">
   <img class="img-fluid" src="<%= @data.thumbnail %>" alt="">
   <div class="card-body py-1">
-    <%= hidden_input(@form, :hidden, name: "data[id][]", value: @data.id) %>
-    <%= hidden_input(@form, :hidden, name: "data[selected?][]", value: "false") %>
+    <%= hidden_input(@form, :hidden, name: "data[][#{@data.id}][selected?]", value: "false") %>
     <span class="card-title my-0"><b><%= @data.title %></b></span>
   </div>
   <div class="overlay"></div>
