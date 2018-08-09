@@ -2,9 +2,13 @@
 
 <button id="selectAll" class="btn btn-elixir">Toggle selection</button>
 
-<%= form_for @conn, download_path(@conn, :new), fn f -> %>
+<%= form_for @conn, download_path(@conn, :new), [id: "download_form"], fn f -> %>
   <%= for item <- @videos do 
     render "video_thumbnail.html", data: item, form: f
   end %>
   <%= render YtDownloaderWeb.SharedView, "download_options.html", form: f %>
 <% end %>
+<script>
+require('js/event_listeners').EventListeners.add_event_listeners();
+require('js/utils').Utils.select_if_checked();
+</script>
