@@ -1,7 +1,7 @@
 <div class="card d-flex flex-row my-1 overlayable">
   <img class="img-fluid" src="<%= @data.thumbnail %>" alt="">
   <div class="card-body py-1">
-    <input name="data[]" type="checkbox" checked value="<%= @data.id %>">
+    <input name="data[]" style="display: none" type="checkbox" checked value="<%= @data.id %>">
     <span class="card-title my-0"><b><%= @data.title %></b></span>
   </div>
   <div class="overlay"></div>
