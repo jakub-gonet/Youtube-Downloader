@@ -12,9 +12,9 @@ defmodule YtDownloaderWeb.PlaylistController do
 
     results =
       id
-      |> YtUtility.get_playlist_data()
+      |> YtUtils.playlist_data()
       |> Map.get("items")
-      |> Enum.map(&YtUtility.extract_video_data(&1, wanted))
+      |> Enum.map(&YtUtils.extract_properties(&1, wanted))
 
     render(conn, "playlist.html", videos: results, title: playlist_title)
   end

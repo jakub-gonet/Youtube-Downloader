@@ -3,7 +3,7 @@ defmodule YtDownloaderWeb.SearchController do
   require Logger
 
   def search(conn, %{"search" => %{"q" => query}}) do
-    case YtUtility.get_url_type(query) do
+    case YtUtils.url_type(query) do
       type when type in [:video, :playlist] ->
         redirect_to(conn, query, type)
 
@@ -29,9 +29,9 @@ defmodule YtDownloaderWeb.SearchController do
 
         results =
           query
-          |> YtUtility.search("video,playlist")
+          |> YtUtils.search()
           |> Map.get("items")
-          |> Enum.map(&YtUtility.extract_video_data(&1, wanted))
+          |> Enum.map(&YtUtils.extract_properties(&1, wanted))
 
         render(conn, "search.html", search_results: results)
     end

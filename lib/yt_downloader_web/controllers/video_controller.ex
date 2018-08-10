@@ -12,10 +12,10 @@ defmodule YtDownloaderWeb.VideoController do
 
     results =
       id
-      |> YtUtility.get_video_data()
+      |> YtUtils.video_data()
       |> Map.get("items")
       |> List.first()
-      |> YtUtility.extract_video_data(wanted)
+      |> YtUtils.extract_properties(wanted)
 
     render(conn, "video.html", data: results)
   end
